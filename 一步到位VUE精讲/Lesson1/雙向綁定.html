@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- v-model 是雙向資料綁定的體現，只會體現在UI的控件中，且只能用於有value的element 
+        它本身是 v-bind:value 和 v-on:input 結合的語法糖-->
+
+    <div id="app">
+        <!-- <input type="text" v-model = "msg"> -->
+        <!-- 下面的效果和 v-model 一樣 -->
+        <input type="text" v-bind:value = "msg" v-on:input = "valueChange">
+        <h3>{{msg}}</h3>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+                    msg:"狗狗"
+                }
+            },
+            methods:{
+                valueChange(e){
+                    // e.target 當前事件的目標
+                    this.msg = e.target.value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

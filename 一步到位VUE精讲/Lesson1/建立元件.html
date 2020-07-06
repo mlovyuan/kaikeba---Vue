@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- v-model 是雙向資料綁定的體現，只會體現在UI的控件中，且只能用於有value的element 
+        它本身是 v-bind:value 和 v-on:input 結合的語法糖-->
+
+    <div id="app">
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 建立局部入口元件
+        let App = {
+            data(){
+                return{
+
+                }
+            },
+            template:"<div>我是入口元件</div>"
+        }
+        console.log(App);
+
+        let vm = new Vue({
+            el:"#app",
+            data(){
+                return{
+
+                }
+            },
+            // 加載子元件
+            components:{
+                App
+            },
+            // 父元件可以直接使用
+            template:"<App></App>"
+        })
+        console.log(vm);
+    </script>
+</body>
+</html>
