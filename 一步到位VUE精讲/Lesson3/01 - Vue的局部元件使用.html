@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 建立全域元件，第一個參數是元件名稱
+        Vue.component("child",{
+            template:`
+                <div>
+                    <p>我是子元件</p>
+                    {{childData}}
+                    <<input type="text" v-model=childData />
+                </div>
+            `,
+            props:["childData"]
+        });
+
+        // 父元件的數據傳遞至子元件
+        // 1. 給父元件綁定自訂義屬性
+        // 2. 在子元件中使用props接收父元件傳遞的數據
+        // 3. 可在子元件中任意使用
+        Vue.component("parent",{
+            data(){
+                return{
+                    msg:"我是父元件的數據"
+                }
+            },
+            template:`
+                <div>
+                    <p>我是父元件</p>
+                    <child :childData='msg' />
+                </div>
+            `
+        });
+        
+        let App = {
+            template:`
+                <div>
+                    <Vheader/>
+                    <div>
+                        <Vaside/>
+                        <Vcontent/>
+                    </div>
+                </div>
+            `,
+            components:{
+                Vheader,
+                Vaside,
+                Vcontent
+            }
+        };
+
+        let vm = new Vue({
+            el:"#app",
+            data(){
+                return{
+
+                }
+            },
+            // 加載子元件
+            components:{
+                App
+            },
+            // 父元件可以直接使用
+            template:"<App></App>"
+        })
+
+    </script>
+</body>
+</html>
