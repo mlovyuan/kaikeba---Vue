@@ -13,22 +13,28 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         // 建立全域元件，第一個參數是元件名稱
-        Vue.component("child",{
+        Vue.component("Child",{
             template:`
                 <div>
                     <p>我是子元件</p>
-                    {{childData}}
-                    <input type="text" v-model=childData />
+                    <input type="text" v-model=childData @input='changeValue(childData)' />
                 </div>
             `,
-            props:["childData"]
+            props:["childData"],
+            methods:{
+                changeValue(val){
+                    // 自訂義的事件一定會通過this.$emit()觸發
+                    // $emit(自訂意的事件名, 資料)
+                    this.$emit('childHandler', val);
+                }
+            }
         });
 
-        // 父元件的數據傳遞至子元件
-        // 1. 給父元件綁定自訂義屬性
-        // 2. 在子元件中使用props接收父元件傳遞的數據
+        // 子元件的數據傳遞至父元件
+        // 1. 給父元件綁定自訂義事件
+        // 2. 在子元件中觸發原生的事件，在其methods中使用$emit觸發自訂義的@childHandler
         // 3. 可在子元件中任意使用
-        Vue.component("parent",{
+        Vue.component("Parent",{
             data(){
                 return{
                     msg:"我是父元件的數據"
@@ -37,26 +43,22 @@
             template:`
                 <div>
                     <p>我是父元件</p>
-                    <child :childData='msg' />
+                    <Child :childData='msg' @childHandler='childHandler' />
                 </div>
-            `
+            `,
+            methods:{
+                childHandler(val){
+                    console.log(val);
+                }
+            }
         });
         
         let App = {
             template:`
                 <div>
-                    <Vheader/>
-                    <div>
-                        <Vaside/>
-                        <Vcontent/>
-                    </div>
+                    <Parent/>
                 </div>
-            `,
-            components:{
-                Vheader,
-                Vaside,
-                Vcontent
-            }
+            `
         };
 
         let vm = new Vue({

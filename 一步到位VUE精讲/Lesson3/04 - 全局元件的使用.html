@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .default{
+            cursor: pointer;
+        }
+        .login{
+            background-color:antiquewhite;
+        }
+        .register{
+            background-color:burlywood;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,8 +26,14 @@
         // 建立全域元件，第一個參數是元件名稱
         Vue.component("Vbtn",{
             template:`
-                <button>按鈕</button>
+                <!-- Slot 是一種用於內容分配的元件，也就是應用上若buton的"按鈕"想改成其他字便可以使用slot  -->
+                <button class='default' :class='type'>
+                    <slot>
+                        按鈕
+                    </slot>
+                </button>
             `,
+            props:['type']
         });
 
         let Vcontent = {
@@ -24,6 +41,8 @@
                 <div>
                     我是內容元件
                     <Vbtn/>
+                    <Vbtn type='login'>登入</Vbtn>
+                    <Vbtn type='register'>註冊</Vbtn>
                 </div>`
         };
 
