@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綁定CSS</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .backg {
+            background-color: red;
+        }
+
+        .fontcolor {
+            color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 做了榜定未加字串符會到data去找 -->
+        <!-- 綁定樣式藥用字串，多個用數組方式 -->
+        <p :class="'backg'">{{msg}}</p>
+
+        <!-- 三元表達式，用bool和if-else簡寫來判斷是否使用該CSS -->
+        <p :class="['backg', flag?'fontcolor':'']">{{msg}}</p>
+
+        <!-- 數組嵌套，上一種的簡寫 -->
+        <p :class="['backg', 'fontcolor':flag]">{{msg}}</p>
+
+        <!-- 可用key:value直接填寫，而其格式與JSON相同 -->
+        <p :style="[style1, style2]">{{msg}}</p>
+
+        <button @click='bigger'>大大大</button>
+    </div>
+</body>
+
+</html>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: 123,
+            flag: true,
+            style1: { 'background-color': 'brown', color: 'white' },
+            style2: { 'font-size': '18px' }
+        },
+        methods: {
+            bigger(){
+                this.style2['font-size'] = '22px'
+            }
+        }
+
+
+    })
+</script>

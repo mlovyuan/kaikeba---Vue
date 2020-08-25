@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽獎小遊戲</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>{{score}}</p>
+        <p>{{level}}</p>
+        <input type="button" value="Start" @click="start()">
+        <input type="button" value="Stop" @click="stop()">
+    </div>
+</body>
+
+</html>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            score: 0,
+            level: null,
+            intervalIndex: null,
+        },
+        methods: {
+            start() {
+                if(this.intervalIndex == null){
+                    this.intervalIndex = setInterval(() => {
+                        // vm.score
+                        this.score = parseInt(Math.random() * 100);
+    
+                        switch (true) {
+                            case this.score < 30:
+                                this.level = "參與獎";
+                                break;
+                            case this.score >= 30 && this.score < 65:
+                                this.level = "三等獎";
+                                break;
+                            case this.score >= 65 && this.score < 85:
+                                this.level = "二等獎";
+                                break;
+                            case this.score >= 85:
+                                this.level = "一等獎";
+                                break;
+                        }
+                    }, 50)
+                }
+            },
+            stop(){
+                clearInterval(this.intervalIndex);
+                this.intervalIndex = null;
+            }
+        }
+    })
+</script>
