@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table View增刪</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table {
+            width: 600px;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        .oddStyle {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>編號</th>
+                <th>姓名</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(user,index) in userList" :key="user.id" :class="{'oddStyle':isOdd(index)}">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td @click="remove(index)">刪除</td>
+            </tr>
+        </table>
+
+        <input type="text" v-model="id">
+        <input type="text" v-model="userName">
+        <button @click="addUser">新增</button>
+    </div>
+</body>
+
+</html>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            userList: [
+                { id: 1, name: "張三" },
+                { id: 2, name: "李四" },
+                { id: 3, name: "王五" },
+                { id: 4, name: "趙六" },
+            ],
+            id: 5,
+            userName: ""
+        },
+        methods: {
+            isOdd(index) {
+                let res = (index + 1) % 2 == 1 ? true : false;
+                return res;
+            },
+            addUser(){
+                // 先執行再++
+                this.userList.push({id: this.id++, name: this.userName});
+            },
+            remove(index){
+                this.userList.splice(index, 1);
+            }
+        }
+    })
+</script>

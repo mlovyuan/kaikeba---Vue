@@ -27,7 +27,7 @@
         <p :class="['backg', flag?'fontcolor':'']">{{msg}}</p>
 
         <!-- 數組嵌套，上一種的簡寫 -->
-        <p :class="['backg', 'fontcolor':flag]">{{msg}}</p>
+        <p :class="['backg', {'fontcolor':flag}]">{{msg}}</p>
 
         <!-- 可用key:value直接填寫，而其格式與JSON相同 -->
         <p :style="[style1, style2]">{{msg}}</p>
