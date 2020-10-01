@@ -1,17 +1,31 @@
 <template>
-  <div id="app">
-    <Item :isActive="true">
-      123132
-    </Item>
+  <div id="app" style="width: 100px; height: 30px; border:1px solid">
+    <!-- <Item :isActive="curActive==='動漫'" @active="curActive='動漫'">
+      動漫
+    </Item> -->
+
+    <TitleMenu>
+    </TitleMenu>
   </div>
 </template>
 
 <script>
-import Item from "./components/Item"
+import Item from "./components/TitleMenu"
 export default {
   name: 'App',
+  // 宣告使用的子組件
   components: {
-    Item
+    TitleMenu
+  },
+  data(){
+    return{
+      curActive:""
+    }
+  },
+  methods:{
+    test(e){
+      console.log(e);
+    }
   }
 }
 </script>
