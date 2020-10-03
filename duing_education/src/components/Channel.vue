@@ -1,13 +1,9 @@
 <template>
-  <div class="title-menu">
+  <div class="channel">
     <Item :isActive="isActive" @beActive="$emit('be-active')">
       <div class="inner">
-        <div class="left">
-          <slot name="title"> </slot>
-        </div>
-        <div class="right">
-          <slot name="icon"> </slot>
-        </div>
+        <span class="name"></span>
+        <span class="number"></span>
       </div>
     </Item>
   </div>
@@ -25,27 +21,35 @@ export default {
       // required: true, // 約束isActive是否為必填，必須要傳遞
       default: false, // 傳遞的默認值
     },
+    channelData: {
+      type: Object,
+      default: function () { // 當type為Object，默認需要以函數方式返回結果
+        return {};
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.title-menu {
+.channel {
   width: 100%;
-  height: 46px;
-  line-height: 46px;
+  height: 40px;
+  line-height: 40px;
 }
 .inner {
   padding: 0 20px;
 }
-.left {
-  float: left;
+.name {
+  font-size: 14px;
   color: #212121;
-  font-weight: 500;
 }
-.right {
-  float: right;
+.number {
   font-size: 12px;
   color: #999;
+  margin-left: 8px;
+}
+.name .number {
+  float: left;
 }
 </style>

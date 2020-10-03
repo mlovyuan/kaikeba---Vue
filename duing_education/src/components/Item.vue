@@ -16,8 +16,8 @@ export default {
   },
   methods: {
     handleClick() {
-      // 向父組件拋出名為beClick的事件，後面參數為要傳遞的data
-      this.$emit("beClick");
+      // 向父組件拋出名為be-active的事件，後面參數為要傳遞的data
+      this.$emit("be-active");
     },
   },
 };

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import channelServ from './services/channel'
 
 Vue.config.productionTip = false
 

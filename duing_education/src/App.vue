@@ -1,11 +1,18 @@
 <template>
   <div id="app" style="width: 100px; height: 30px; border:1px solid">
-    <!-- <Item :isActive="curActive==='動漫'" @active="curActive='動漫'">
+    <!-- <Item :isActive="curActive==='動漫'" @be-active="curActive='動漫'">
       動漫
     </Item> -->
 
-    <TitleMenu>
+    <TitleMenu :isActive="select" @be-active="select = true">
+      <!-- 傳遞內容給名為title的slot -->
+      <template v-slot:title>
+      </template>
+      <template v-slot:icon>
+      </template>
     </TitleMenu>
+    <Channel>
+    </Channel>
   </div>
 </template>
 
@@ -15,11 +22,13 @@ export default {
   name: 'App',
   // 宣告使用的子組件
   components: {
-    TitleMenu
+    TitleMenu,
+    Channel
   },
   data(){
     return{
-      curActive:""
+      // curActive:""
+      select:false
     }
   },
   methods:{
