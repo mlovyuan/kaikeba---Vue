@@ -11,7 +11,7 @@
       <template v-slot:icon>
       </template>
     </TitleMenu>
-    <Channel>
+    <ChannelList>
     </Channel>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   // 宣告使用的子組件
   components: {
     TitleMenu,
-    Channel
+    ChannelList
   },
   data(){
     return{
