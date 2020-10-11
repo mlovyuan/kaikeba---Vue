@@ -4,14 +4,14 @@
       動漫
     </Item> -->
 
-    <TitleMenu :isActive="select" @be-active="select = true">
+    <TitleMenu :isActive="activeId===100" @be-active="activeId = 100">
       <!-- 傳遞內容給名為title的slot -->
       <template v-slot:title>
       </template>
       <template v-slot:icon>
       </template>
     </TitleMenu>
-    <ChannelList>
+    <ChannelList :activeId="activeId" @active="activeId=$event">
     </Channel>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   data(){
     return{
       // curActive:""
-      select:false
+      activeId:100
     }
   },
   methods:{

@@ -1,7 +1,7 @@
 <template>
   <div class="channel-list">
       <div v-for="item in channels" :key="item.id" class="item">
-          <Channel :data="item">
+          <Channel @be-active="$emit('be-active', item.id)" :isActive="item.id===activeId" :data="item">
       </div>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   components: {
     Channel,
   },
-  props:["activeId"],
+  props: ["activeId"],
   data() {
     return {
       channels: [],
@@ -21,7 +21,7 @@ export default {
   },
   async created() {
     let datas = await channelServ.getChannels();
-    this.channels = datas.filter((item) => item.name !=="热门");
+    this.channels = datas.filter((item) => item.name !== "热门");
   },
 };
 </script>
